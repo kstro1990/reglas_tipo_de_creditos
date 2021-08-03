@@ -7,16 +7,26 @@ $file = fopen("Notificacion_URL_".date("Y-m-d").".txt","a");
 
 fwrite($file, "...........------------......................------------...........".PHP_EOL);
 try {
-    $url = 'https://sites.placetopay.ec/api/notification/';
+    $url = 'https://blog.smartfit.com.co/wp-json/placetopay-payment/v2/callback/';
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=UTF-8'));
-    $result = curl_exec($ch);
-    echo $result;
-    fwrite($file, $result .PHP_EOL);
 
+    if(curl_exec($ch) === false)
+    {
+        echo 'Curl error: ' . curl_error($ch);
+        fwrite($file, 'Curl error: ' . curl_error($ch) .PHP_EOL);
+
+    }
+    else
+    {
+        echo 'Operación completada sin errores';
+        $result = curl_exec($ch);
+        echo $result;
+        fwrite($file, $result .PHP_EOL);
+    }
 } catch (\Exception $e) {
     echo "ERROR : " .$e;
     fwrite($file, "ERROR : " .$e .PHP_EOL);
