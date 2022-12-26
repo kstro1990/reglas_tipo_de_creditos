@@ -106,6 +106,31 @@ function postCreditoAustro(){
   });
 }
 
+function postBCR(){
+  var creditoP0 = $("#creditoP0").val();
+
+  console.log(creditoP0);
+
+
+  
+  $(".section").append("<div class='text-center'><div class='spinner-border text-primary' role='status'><span class='sr-only'>Loading...</span></div></div>");
+  $.ajax({
+    method: "POST",
+    url: "BCR.php",
+    data: {
+      creditoP0 : creditoP0,
+    },
+    success: function(result) {
+      console.log(result);
+      $( ".section" ).empty();
+      $(".section").append("<p class='card-text'>" + result + "</p>");
+      $("html, body").animate({
+      scrollTop: 0
+      }, 500);
+    }
+  });
+}
+
 function validate(input){
     if(/[^0-9,]/.test(input.value))input.value = input.value.replace(/[^0-9,]/g,'');
 }

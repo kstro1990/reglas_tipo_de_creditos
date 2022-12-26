@@ -31,7 +31,7 @@ class Filtro_tipo_Credito
           if ($installments[0]=="") {
             $installments=[];
           }
-          //valida el tipo de credito --> si es necerio agragar un nuevo tipo de credto agregar un case nuevo
+   
           switch ($clave) {
             case 'corriente':
             if ($valor == 'si') {
@@ -124,7 +124,6 @@ class Filtro_tipo_Credito
               break;
           }
           $index++;
-
     }
 // print_r($array);die();
 // "include" es la llave para el array
